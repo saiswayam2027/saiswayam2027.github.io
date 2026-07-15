@@ -1,240 +1,507 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<title>Sai Swayam Pradhan | Portfolio</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sai Swayam Pradhan — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --bg:#EEF2F7;
+    --surface:#FFFFFF;
+    --surface-2:#E3EAF3;
+    --ink:#1C2B4A;
+    --ink-dim:#5C6B85;
+    --accent:#FF6B4A;
+    --accent-soft:#FFE3DA;
+    --accent-2:#2F9E7A;
+    --line:#C7D2E0;
+    --display:'Space Grotesk', sans-serif;
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:40px 40px;
+    opacity:0.5;
+  }
+  ::selection{ background:var(--accent); color:#fff; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .wrap{ max-width:940px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    margin:0;
-    background:#f4f6f8;
-}
+  /* corner-bracket card style — evokes a technical drawing / spec panel */
+  .spec{
+    position:relative; background:var(--surface); border:1px solid var(--line); border-radius:2px;
+  }
+  .spec::before, .spec::after{
+    content:""; position:absolute; width:14px; height:14px; border:2px solid var(--accent);
+    opacity:0.9;
+  }
+  .spec::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .spec::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
 
-header{
-    background:#0f172a;
-    color:white;
-    padding:40px;
-    text-align:center;
-}
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(238,242,247,0.88); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{ max-width:940px; margin:0 auto; padding:16px 28px; display:flex; align-items:center; justify-content:space-between; }
+  .nav-brand{ font-family:var(--mono); font-size:13px; font-weight:600; letter-spacing:0.02em; color:var(--ink); text-decoration:none; }
+  .nav-brand .rev{ color:var(--accent); }
+  .nav-links{ display:flex; gap:26px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-family:var(--mono); font-size:12px; text-decoration:none; color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.06em; transition:color .2s ease; cursor:pointer; }
+  .nav-links a:hover{ color:var(--accent); }
+  @media (max-width:640px){ .nav-links{ gap:14px; } .nav-links a{ font-size:10px; } }
 
-header h1{
-    margin:0;
-}
+  /* ---------- HERO ---------- */
+  header.hero{ padding:150px 0 70px; }
+  .eyebrow{ font-family:var(--mono); font-size:12px; color:var(--accent); display:flex; align-items:center; gap:9px; margin-bottom:22px; letter-spacing:0.06em; text-transform:uppercase; }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 0 3px rgba(47,158,122,0.18); animation:pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
 
-.container{
-    width:80%;
-    margin:auto;
-    margin-top:30px;
-}
+  .hero h1{ font-family:var(--display); font-weight:700; font-size:clamp(32px,5.6vw,54px); line-height:1.1; margin:0 0 18px; letter-spacing:-0.01em; }
+  .hero h1 .dim{ color:var(--ink-dim); font-weight:500; }
+  .hero-sub{ font-size:17px; color:var(--ink-dim); max-width:580px; margin:0 0 34px; }
+  .hero-sub strong{ color:var(--ink); font-weight:600; }
 
-.section{
-    background:white;
-    padding:25px;
-    margin-bottom:25px;
-    border-radius:10px;
-    box-shadow:0px 3px 8px rgba(0,0,0,0.1);
-}
+  /* title block, like an engineering drawing's info stamp */
+  .titleblock{ display:grid; grid-template-columns:repeat(4,1fr); max-width:580px; font-family:var(--mono); font-size:11.5px; }
+  .titleblock div{ border:1px solid var(--line); padding:10px 12px; background:var(--surface); }
+  .titleblock .lbl{ color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.04em; font-size:9.5px; margin-bottom:4px; }
+  .titleblock .val{ color:var(--ink); font-weight:600; }
+  @media (max-width:560px){ .titleblock{ grid-template-columns:1fr 1fr; } }
 
-h2{
-    color:#0f172a;
-}
+  .hero-links{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .btn{ font-family:var(--mono); font-size:12.5px; text-decoration:none; padding:11px 18px; border-radius:3px; border:1px solid var(--line); color:var(--ink); transition:all .2s ease; display:inline-flex; align-items:center; gap:8px; background:var(--surface); cursor:pointer; }
+  .btn.primary{ background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+  .btn.primary:hover{ background:#ff5836; }
+  .btn:not(.primary):hover{ border-color:var(--accent); color:var(--accent); }
 
-.project{
-    margin-bottom:20px;
-}
+  /* ---------- SECTION shared ---------- */
+  section{ padding:82px 0; border-top:1px solid var(--line); }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:44px; }
+  .sec-fig{ font-family:var(--mono); color:var(--accent); font-size:12px; letter-spacing:0.04em; }
+  .sec-title{ font-family:var(--display); font-size:23px; font-weight:700; margin:0; }
+  .sec-line{ flex:1; height:1px; background:var(--line); }
 
-.skills span{
-    display:inline-block;
-    background:#e2e8f0;
-    padding:8px 14px;
-    margin:5px;
-    border-radius:6px;
-}
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
 
-a{
-    text-decoration:none;
-    color:#2563eb;
-}
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:48px; }
+  .about-grid p{ color:var(--ink-dim); font-size:15.5px; margin:0 0 15px; }
+  .about-grid p strong{ color:var(--ink); font-weight:600; }
+  .fact-list{ list-style:none; margin:0; padding:0; font-family:var(--mono); font-size:12.5px; }
+  .fact-list li{ display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--line); color:var(--ink-dim); }
+  .fact-list li span:last-child{ color:var(--ink); font-weight:600; text-align:right; }
+  @media (max-width:720px){ .about-grid{ grid-template-columns:1fr; } }
 
-footer{
-    text-align:center;
-    padding:20px;
-    background:#0f172a;
-    color:white;
-}
+  /* ---------- PIPELINE (signature element) ---------- */
+  .pipeline-card{ padding:30px; margin-bottom:8px; }
+  .pipeline-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+  .pipeline-head h3{ margin:0; font-family:var(--display); font-size:19px; }
+  .pipeline-head p{ color:var(--ink-dim); font-size:14.5px; margin:8px 0 22px; max-width:640px; }
+  .stack{ display:flex; gap:8px; flex-wrap:wrap; }
+  .chip{ font-family:var(--mono); font-size:10.5px; color:var(--accent-2); border:1px solid rgba(47,158,122,0.35); background:rgba(47,158,122,0.07); padding:4px 9px; border-radius:20px; white-space:nowrap; }
 
+  .pipeline{ display:flex; align-items:center; gap:4px; overflow-x:auto; padding:8px 2px 22px; }
+  .pnode{
+    flex:1; min-width:110px; text-align:center; padding:16px 10px; border:1.5px solid var(--line);
+    border-radius:4px; background:var(--surface-2); font-family:var(--mono); font-size:11px; color:var(--ink-dim);
+    transition:all .3s ease; position:relative;
+  }
+  .pnode .n-title{ font-weight:600; color:var(--ink); font-size:11.5px; margin-bottom:4px; }
+  .pnode.active{ border-color:var(--accent); background:var(--accent-soft); color:var(--ink); box-shadow:0 0 0 3px rgba(255,107,74,0.12); }
+  .pnode.done{ border-color:var(--accent-2); background:rgba(47,158,122,0.08); }
+  .parrow{ color:var(--line); font-size:16px; flex-shrink:0; }
+  .parrow.active{ color:var(--accent); }
+
+  .pipeline-controls{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .pipeline-status{ font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); min-height:18px; }
+  .pipeline-status .ok{ color:var(--accent-2); font-weight:600; }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ position:relative; padding-left:36px; }
+  .timeline::before{ content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line); }
+  .tl-item{ position:relative; padding-bottom:42px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-fig{ position:absolute; left:-36px; top:2px; font-family:var(--mono); font-size:10px; color:var(--accent); }
+  .tl-dot{ position:absolute; left:-5px; top:20px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:2px solid var(--accent-2); }
+  .tl-role{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-bottom:6px; margin-top:14px; }
+  .tl-role h3{ margin:0; font-size:16.5px; font-family:var(--display); font-weight:700; }
+  .tl-role .org{ color:var(--accent); font-weight:600; font-family:var(--sans); }
+  .tl-date{ font-family:var(--mono); font-size:12px; color:var(--ink-dim); white-space:nowrap; }
+  .tl-item ul{ margin:8px 0 0; padding-left:18px; color:var(--ink-dim); font-size:14.5px; }
+  .tl-item li{ margin-bottom:4px; }
+
+  /* ---------- PROJECTS ---------- */
+  .project{ padding:28px 28px 24px; margin-bottom:24px; transition:transform .25s ease; }
+  .project:hover{ transform:translateY(-2px); }
+  .project-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:10px; }
+  .project h3{ margin:0; font-family:var(--display); font-size:18px; }
+  .project p.desc{ color:var(--ink-dim); font-size:14.5px; margin:0 0 16px; }
+  .project-links{ display:flex; gap:16px; margin-top:6px; }
+  .project-links a{ font-family:var(--mono); font-size:12px; color:var(--ink-dim); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .2s ease, border-color .2s ease; }
+  .project-links a:hover{ color:var(--accent); border-color:var(--accent); }
+
+  /* stamp demo (semantic cache) */
+  .stamp-demo{ display:flex; gap:20px; flex-wrap:wrap; align-items:center; background:var(--surface-2); border:1px solid var(--line); border-radius:4px; padding:18px 20px; margin:6px 0 18px; }
+  .stamp-btn{ font-family:var(--mono); font-size:11.5px; border:1px solid var(--line); background:var(--surface); color:var(--ink); padding:7px 11px; border-radius:3px; cursor:pointer; transition:all .15s ease; }
+  .stamp-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .stamp-result{ font-family:var(--mono); font-size:12px; padding:8px 14px; border-radius:3px; border:2px solid transparent; min-width:210px; }
+  .stamp-result.miss{ border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+  .stamp-result.hit{ border-color:var(--accent-2); color:var(--accent-2); background:rgba(47,158,122,0.08); }
+
+  /* latency gauge */
+  .gauge-demo{ background:var(--surface-2); border:1px solid var(--line); border-radius:4px; padding:20px; margin:6px 0 18px; }
+  .gauge-track{ height:10px; border-radius:6px; background:var(--line); overflow:hidden; margin-bottom:10px; }
+  .gauge-fill{ height:100%; width:0%; background:linear-gradient(90deg, var(--accent-2), var(--accent)); border-radius:6px; transition:width 1.1s cubic-bezier(.2,.7,.3,1); }
+  .gauge-label{ font-family:var(--mono); font-size:12px; color:var(--ink-dim); display:flex; justify-content:space-between; }
+  .gauge-label b{ color:var(--ink); }
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{ display:grid; grid-template-columns:1fr 1fr; gap:26px 40px; }
+  .skill-group h4{ font-family:var(--mono); font-size:11.5px; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; margin:0 0 12px; }
+  .skill-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-chips span{ font-size:13px; padding:6px 12px; border-radius:3px; background:var(--surface); border:1px solid var(--line); color:var(--ink-dim); }
+  @media (max-width:640px){ .skill-groups{ grid-template-columns:1fr; } }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-card{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; padding:26px 28px; }
+  .edu-card h3{ margin:0 0 6px; font-family:var(--display); font-size:17px; }
+  .edu-card .meta{ color:var(--ink-dim); font-size:13.5px; }
+  .edu-card .cgpa{ font-family:var(--mono); color:var(--accent); font-size:22px; font-weight:700; text-align:right; }
+  .edu-card .cgpa small{ display:block; color:var(--ink-dim); font-size:10.5px; font-weight:400; margin-top:2px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding:88px 0 60px; text-align:center; border-top:1px solid var(--line); }
+  footer h2{ font-family:var(--display); font-size:clamp(24px,4vw,36px); margin:0 0 16px; }
+  footer p{ color:var(--ink-dim); max-width:440px; margin:0 auto 30px; }
+  .contact-links{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:46px; }
+  .foot-note{ font-family:var(--mono); font-size:11px; color:var(--ink-dim); opacity:.8; }
+  .foot-note .accent-dot{ color:var(--accent); }
+
+  @media (max-width:640px){ header.hero{ padding:130px 0 56px; } section{ padding:60px 0; } }
 </style>
-
 </head>
-
 <body>
 
-<header>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="javascript:void(0)" data-target="top">S.PRADHAN <span class="rev">// rev.01</span></a>
+    <ul class="nav-links">
+      <li><a data-target="about">About</a></li>
+      <li><a data-target="experience">Experience</a></li>
+      <li><a data-target="projects">Projects</a></li>
+      <li><a data-target="skills">Skills</a></li>
+      <li><a data-target="contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-<h1>Sai Swayam Pradhan</h1>
+<div class="wrap" id="top">
 
-<p>B.Tech Computer Science (AI & ML) | VIT Chennai</p>
+  <header class="hero">
+    <div class="eyebrow"><span class="dot"></span>Open to Software Developer roles</div>
+    <h1>Sai Swayam Pradhan<br><span class="dim">ships production AI pipelines, not just notebooks.</span></h1>
+    <p class="hero-sub">
+      Computer Science undergrad at <strong>VIT Chennai</strong> (CGPA 9.00). I build the multi-service backends
+      that sit underneath a model — queues, caches, containers, and orchestration — so an AI system can actually
+      run in production, offline, and on a client's own infrastructure.
+    </p>
 
-<p>
-📧 saiswayam1919@gmail.com |
-🔗 <a style="color:white;" href="https://github.com/saiswayam2027">GitHub</a> |
-🔗 <a style="color:white;" href="https://linkedin.com/in/sai-swayam-pradhan">LinkedIn</a>
-</p>
+    <div class="titleblock">
+      <div><div class="lbl">Role</div><div class="val">Software Developer</div></div>
+      <div><div class="lbl">Focus</div><div class="val">Backend + GenAI Systems</div></div>
+      <div><div class="lbl">Status</div><div class="val">Available</div></div>
+      <div><div class="lbl">Based in</div><div class="val">India</div></div>
+    </div>
 
-</header>
+    <div class="hero-links">
+      <a class="btn primary" href="mailto:saiswayam1919@gmail.com">Get in touch</a>
+      <a class="btn" href="https://github.com/saiswayam2027" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/sai-swayam-pradhan" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </header>
 
-<div class="container">
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-head"><span class="sec-fig">FIG. 01</span><h2 class="sec-title">About</h2><div class="sec-line"></div></div>
+    <div class="about-grid reveal">
+      <div>
+        <p>Most GenAI demos stop at a notebook cell. My current work at Prutech doesn't get that luxury —
+          it has to run <strong>fully offline</strong>, on client hardware, generating compliance-grade
+          geological reports that a real mining company will sign off on. That means the interesting part
+          isn't the model, it's everything around it: <strong>FastAPI, Celery, Redis, PostgreSQL</strong>,
+          all orchestrated with Docker Compose into one reproducible system.</p>
+        <p>I like sitting at that boundary — where a language model's output has to become a structured,
+          multi-chapter, standards-compliant document, not just a chat reply.</p>
+        <p>Looking for a Software Developer role building scalable, reliable systems for mission-critical,
+          enterprise-scale products.</p>
+      </div>
+      <ul class="fact-list">
+        <li><span>Studying</span><span>B.Tech CS, VIT Chennai</span></li>
+        <li><span>Graduating</span><span>2027</span></li>
+        <li><span>CGPA</span><span>9.00</span></li>
+        <li><span>DSA solved</span><span>100+ LeetCode</span></li>
+        <li><span>Currently</span><span>AI Intern @ Prutech</span></li>
+        <li><span>Also</span><span>ML Consultant @ SenseSemi</span></li>
+      </ul>
+    </div>
+  </section>
 
-<div class="section">
+  <!-- FLAGSHIP PIPELINE -->
+  <section id="pipeline-section">
+    <div class="sec-head"><span class="sec-fig">FIG. 02</span><h2 class="sec-title">Flagship system</h2><div class="sec-line"></div></div>
+    <div class="spec pipeline-card reveal">
+      <div class="pipeline-head">
+        <h3>Offline RAG Report Generator — Prutech</h3>
+        <div class="stack">
+          <span class="chip">FastAPI</span><span class="chip">Celery</span><span class="chip">Redis</span><span class="chip">PostgreSQL</span><span class="chip">Docker Compose</span>
+        </div>
+      </div>
+      <p>Turns raw borehole &amp; sample spreadsheets into a MEMC-compliant, multi-chapter G3 geological report —
+        fully offline, all sensitive data staying on-premise. Press run to step through the pipeline.</p>
 
-<h2>About Me</h2>
+      <div class="pipeline" id="pipelineRow">
+        <div class="pnode" data-desc="Raw borehole & sample datasets (.xlsx) from the field."><div class="n-title">Field Data</div>Excel input</div>
+        <div class="parrow">→</div>
+        <div class="pnode" data-desc="Documents are embedded and indexed with sentence-transformers."><div class="n-title">ChromaDB</div>vector store</div>
+        <div class="parrow">→</div>
+        <div class="pnode" data-desc="Relevant chunks retrieved for each report section (RAG)."><div class="n-title">Retrieval</div>LangChain</div>
+        <div class="parrow">→</div>
+        <div class="pnode" data-desc="Local generation — no data ever leaves the machine."><div class="n-title">Ollama LLM</div>Mistral / Llama 3</div>
+        <div class="parrow">→</div>
+        <div class="pnode" data-desc="Assembled into a structured, standards-compliant document."><div class="n-title">G3 Report</div>output .docx</div>
+      </div>
 
-<p>
-I am a Computer Science undergraduate at VIT Chennai specializing in Artificial Intelligence and Machine Learning.
-My interests include Machine Learning, Deep Learning, NLP, and Software Development. I enjoy building AI systems,
-working with real datasets, and deploying machine learning models for real-world applications.
-</p>
+      <div class="pipeline-controls">
+        <button class="btn primary" id="runPipeline">▶ Run pipeline</button>
+        <div class="pipeline-status" id="pipelineStatus">idle — click run to trace a request through the system</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sec-head"><span class="sec-fig">FIG. 03</span><h2 class="sec-title">Experience</h2><div class="sec-line"></div></div>
+    <div class="timeline reveal">
+
+      <div class="tl-item">
+        <span class="tl-fig">01</span><div class="tl-dot"></div>
+        <div class="tl-role"><h3>AI Intern <span class="org">· Prutech</span></h3><span class="tl-date">May 2026 — Present</span></div>
+        <ul>
+          <li>Building a fully-offline system that auto-generates MEMC-compliant G3 geological reports from raw field data, removing manual report drafting.</li>
+          <li>Building a RAG pipeline with ChromaDB + sentence-transformers, local generation via Ollama orchestrated through LangChain.</li>
+          <li>Containerized the multi-service backend (FastAPI, Celery, Redis, PostgreSQL) with Docker Compose for reproducible, one-command deployment.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-fig">02</span><div class="tl-dot"></div>
+        <div class="tl-role"><h3>AI/ML Consultant <span class="org">· SenseSemi Technologies</span></h3><span class="tl-date">May 2026 — Present</span></div>
+        <ul>
+          <li>Developing a cuffless blood-pressure prediction model from physiological signal data for a fabless semiconductor design company.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-fig">03</span><div class="tl-dot"></div>
+        <div class="tl-role"><h3>Linux Intern <span class="org">· Prodevans Pvt. Ltd.</span></h3><span class="tl-date">Jun 2025 — Jul 2025</span></div>
+        <ul>
+          <li>Developed a CNN-based handwriting-recognition model in Python, trained in a Linux-based environment.</li>
+          <li>Integrated the trained model into the LIMP platform pipeline for automated inference.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-head"><span class="sec-fig">FIG. 04</span><h2 class="sec-title">Projects</h2><div class="sec-line"></div></div>
+
+    <div class="spec project reveal">
+      <div class="project-head">
+        <h3>Semantic Search API</h3>
+        <div class="stack"><span class="chip">FastAPI</span><span class="chip">Scikit-learn</span><span class="chip">Docker</span></div>
+      </div>
+      <p class="desc">Embeds queries with SentenceTransformers, clusters them by topic (TF-IDF + NMF), and
+        serves a semantic cache instead of recomputing near-duplicate queries. Send a query, then repeat it.</p>
+
+      <div class="stamp-demo">
+        <div>
+          <button class="stamp-btn" data-q="NASA missions">"NASA missions"</button>
+          <button class="stamp-btn" data-q="GPU benchmarks">"GPU benchmarks"</button>
+          <button class="stamp-btn" data-q="cricket world cup">"cricket world cup"</button>
+        </div>
+        <div class="stamp-result" id="stampResult">awaiting query…</div>
+      </div>
+
+      <div class="project-links"><a href="https://github.com/saiswayam2027/semantic-search-system" target="_blank" rel="noopener">source →</a></div>
+    </div>
+
+    <div class="spec project reveal">
+      <div class="project-head">
+        <h3>Multi-Label Emotion Detection</h3>
+        <div class="stack"><span class="chip">RoBERTa</span><span class="chip">HuggingFace</span><span class="chip">NLP</span></div>
+      </div>
+      <p class="desc">Multi-label emotion classifier trained on GoEmotions (58K Reddit comments). Improved
+        rare-emotion recall by tuning per-label decision thresholds instead of a single global cutoff —
+        macro-F1 rose from 0.45 to ~0.49.</p>
+      <div class="project-links"><a href="https://github.com/saiswayam2027/Emotion-detection-ML" target="_blank" rel="noopener">source →</a></div>
+    </div>
+
+    <div class="spec project reveal">
+      <div class="project-head">
+        <h3>AI-Based Suspicious Activity Detection</h3>
+        <div class="stack"><span class="chip">ESP32-CAM</span><span class="chip">MediaPipe</span><span class="chip">Streamlit</span></div>
+      </div>
+      <p class="desc">Embedded surveillance system: an ESP32-CAM streams video to a Python backend for pose
+        estimation and activity classification, with a live dashboard and automated email alerts.</p>
+
+      <div class="gauge-demo">
+        <div class="gauge-track"><div class="gauge-fill" id="latencyFill"></div></div>
+        <div class="gauge-label"><span>response latency</span><span><b id="latencyVal">—</b> · target &lt;200ms</span></div>
+        <button class="btn" id="runLatency" style="margin-top:14px;">▶ Simulate inference</button>
+      </div>
+
+      <div class="project-links"><a href="https://github.com/saiswayam2027" target="_blank" rel="noopener">source →</a></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head"><span class="sec-fig">FIG. 05</span><h2 class="sec-title">Skills</h2><div class="sec-line"></div></div>
+    <div class="skill-groups reveal">
+      <div class="skill-group"><h4>Languages</h4><div class="skill-chips"><span>Python</span><span>Java</span><span>C</span></div></div>
+      <div class="skill-group"><h4>Core</h4><div class="skill-chips"><span>Machine Learning</span><span>Deep Learning</span><span>NLP</span><span>Statistical Analysis</span><span>System Design basics</span></div></div>
+      <div class="skill-group"><h4>GenAI / ML</h4><div class="skill-chips"><span>RAG</span><span>LangChain</span><span>Ollama</span><span>ChromaDB</span><span>Sentence-Transformers</span><span>Transformers</span><span>RoBERTa</span></div></div>
+      <div class="skill-group"><h4>Tools &amp; Infra</h4><div class="skill-chips"><span>Docker Compose</span><span>FastAPI</span><span>Celery</span><span>Redis</span><span>PostgreSQL</span><span>Git</span><span>Linux</span></div></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sec-head"><span class="sec-fig">FIG. 06</span><h2 class="sec-title">Education</h2><div class="sec-line"></div></div>
+    <div class="spec edu-card reveal">
+      <div>
+        <h3>B.Tech, Computer Science (AI &amp; Machine Learning)</h3>
+        <div class="meta">VIT, Chennai &nbsp;·&nbsp; 2023 – 2027</div>
+        <div class="meta" style="margin-top:8px;">Class XII (CBSE): 91.8% &nbsp;·&nbsp; Class X (CBSE): 92%</div>
+      </div>
+      <div class="cgpa">9.00<small>CGPA</small></div>
+    </div>
+  </section>
 
 </div>
 
-<div class="section">
-
-<h2>Education</h2>
-
-<p><b>B.Tech Computer Science (AI & ML)</b><br>
-VIT Chennai (2023 – 2027)<br>
-CGPA: 8.95
-</p>
-
-<p><b>Class XII (CBSE)</b><br>
-ODM Public School, Bhubaneswar – 91.8%
-</p>
-
-<p><b>Class X (CBSE)</b><br>
-ODM Public School, Bhubaneswar – 92%
-</p>
-
-</div>
-
-<div class="section">
-
-<h2>Experience</h2>
-
-<p><b>Machine Learning Intern – Prodevans Pvt. Ltd.</b><br>
-June 2025 – July 2025</p>
-
-<ul>
-
-<li>Developed a CNN-based handwriting recognition model in Python.</li>
-
-<li>Performed preprocessing and model training on handwritten datasets in a Linux environment.</li>
-
-<li>Integrated the trained model into the LIMP platform pipeline for automated handwriting recognition.</li>
-
-</ul>
-
-</div>
-
-<div class="section">
-
-<h2>Projects</h2>
-
-<div class="project">
-
-<b>Multi-Label Emotion Detection using RoBERTa</b>
-
-<p>
-Built a RoBERTa-based multi-label emotion classifier using the GoEmotions dataset (58K Reddit comments)
-with HuggingFace Transformers. Improved rare emotion detection using optimized decision thresholds,
-increasing macro-F1 from 0.45 to ~0.49.
-</p>
-
-</div>
-
-<div class="project">
-
-<b>Waste Classification using CNN & Bayesian Optimization</b>
-
-<p>
-Developed a PyTorch CNN model for waste image classification using the Kaggle Waste dataset.
-Applied data augmentation and class weighting and optimized hyperparameters using Optuna,
-achieving 86.87% training accuracy.
-</p>
-
-</div>
-
-<div class="project">
-
-<b>AI-Based Suspicious Activity Detection using ESP32-CAM</b>
-
-<p>
-Designed an embedded AI surveillance system using ESP32-CAM. Video streams are processed
-with MediaPipe pose estimation and neural networks for activity classification.
-Includes real-time inference, Streamlit dashboard monitoring, and automated alerts.
-</p>
-
-</div>
-
-<div class="project">
-
-<b>Hospital Management System</b>
-
-<p>
-Developed a web application supporting appointment booking, patient records,
-and prescription uploads using HTML, CSS, and JavaScript.
-</p>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Technical Skills</h2>
-
-<div class="skills">
-
-<span>Python</span>
-<span>Java</span>
-<span>C</span>
-<span>Machine Learning</span>
-<span>Deep Learning</span>
-<span>NLP</span>
-<span>Transformers</span>
-<span>RoBERTa</span>
-<span>CNN</span>
-<span>Git</span>
-<span>GitHub</span>
-<span>Linux</span>
-<span>HTML</span>
-<span>CSS</span>
-<span>JavaScript</span>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Achievements</h2>
-
-<ul>
-<li>Solved 100+ Data Structures and Algorithms problems on LeetCode</li>
-</ul>
-
-</div>
-
-</div>
-
-<footer>
-
-<p>© 2026 Sai Swayam Pradhan</p>
-
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's build something.</h2>
+    <p>Open to Software Developer roles — happiest working where a model meets a real backend.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:saiswayam1919@gmail.com">saiswayam1919@gmail.com</a>
+      <a class="btn" href="tel:+919777677534">+91 9777677534</a>
+      <a class="btn" href="https://github.com/saiswayam2027" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/sai-swayam-pradhan" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <div class="foot-note">built from scratch, no framework <span class="accent-dot">·</span> India</div>
+  </div>
 </footer>
 
-</body>
+<script>
+  // nav + brand scrolling — JS-driven, never real hash navigation
+  document.querySelectorAll('[data-target]').forEach(link=>{
+    link.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const el = document.getElementById(link.getAttribute('data-target'));
+      if(el){ el.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    });
+  });
 
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // pipeline run animation
+  const pnodes = Array.from(document.querySelectorAll('#pipelineRow .pnode'));
+  const parrows = Array.from(document.querySelectorAll('#pipelineRow .parrow'));
+  const pipelineStatus = document.getElementById('pipelineStatus');
+  let pipelineRunning = false;
+
+  document.getElementById('runPipeline').addEventListener('click', ()=>{
+    if(pipelineRunning) return;
+    pipelineRunning = true;
+    pnodes.forEach(n=>{ n.classList.remove('active','done'); });
+    parrows.forEach(a=>a.classList.remove('active'));
+    let i = 0;
+    pipelineStatus.textContent = 'tracing request…';
+    function step(){
+      if(i > 0) pnodes[i-1].classList.remove('active');
+      if(i > 0) pnodes[i-1].classList.add('done');
+      if(i > 0 && parrows[i-1]) parrows[i-1].classList.remove('active');
+      if(i < pnodes.length){
+        pnodes[i].classList.add('active');
+        pipelineStatus.innerHTML = `stage ${i+1}/${pnodes.length}: <b>${pnodes[i].querySelector('.n-title').textContent}</b> — ${pnodes[i].getAttribute('data-desc')}`;
+        if(parrows[i]) parrows[i].classList.add('active');
+        i++;
+        setTimeout(step, 850);
+      } else {
+        pipelineStatus.innerHTML = '<span class="ok">✓ report generated</span> — structured G3 document ready, all data stayed on-premise';
+        pipelineRunning = false;
+      }
+    }
+    step();
+  });
+
+  // semantic cache "stamp" demo
+  const seen = {};
+  const stampResult = document.getElementById('stampResult');
+  document.querySelectorAll('.stamp-demo .stamp-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const q = btn.getAttribute('data-q');
+      if(seen[q]){
+        stampResult.textContent = `CACHE HIT — served "${q}" from semantic cache`;
+        stampResult.className = 'stamp-result hit';
+      } else {
+        seen[q] = true;
+        stampResult.textContent = `CACHE MISS — computed & cached "${q}"`;
+        stampResult.className = 'stamp-result miss';
+      }
+    });
+  });
+
+  // latency gauge demo
+  const latencyFill = document.getElementById('latencyFill');
+  const latencyVal = document.getElementById('latencyVal');
+  document.getElementById('runLatency').addEventListener('click', ()=>{
+    const ms = Math.floor(120 + Math.random()*70); // 120-190ms, under the 200ms target
+    const pct = Math.min(100, (ms/250)*100);
+    latencyFill.style.width = '0%';
+    latencyVal.textContent = '—';
+    requestAnimationFrame(()=>{
+      setTimeout(()=>{
+        latencyFill.style.width = pct + '%';
+        latencyVal.textContent = ms + 'ms';
+      }, 60);
+    });
+  });
+</script>
+
+</body>
 </html>
